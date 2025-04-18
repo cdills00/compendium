@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.4"
+  },
+  "devDependencies": {
+    "daisyui": "^5.0.27"
+  },
+  "scripts": {
+    "build:css": "bunx @tailwindcss/cli -i ./django/static/css/main.css -o ./django/static/css/output.css",
+    "watch:css": "bunx @tailwindcss/cli -i ./django/static/css/main.css -o ./django/static/css/output.css --watch"
+  }
+}
