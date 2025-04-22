@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-6 py-10">
+  <h1 class="text-4xl font-bold mb-8 text-center">👹 Monster Hunter Monster Index</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for monster in monsters %}
+    <div class="card bg-base-100 shadow-lg border border-base-300 hover:shadow-2xl transition-shadow duration-200">
+      <div class="card-body space-y-2">
+        <h2 class="card-title text-xl font-bold">{{ monster.name }}</h2>
+        <p><strong>Species:</strong> {{ monster.species }}</p>
+        <p><strong>Type:</strong> {{ monster.type }}</p>
+
+        {% if monster.elements %}
+        <p><strong>Elements:</strong> {{ monster.elements|join:", " }}</p>
+        {% endif %}
+
+        {% if monster.weaknesses %}
+        <div>
+          <p class="font-semibold">Weaknesses:</p>
+          <ul class="list-disc pl-4 text-sm space-y-1">
+            {% for weakness in monster.weaknesses %}
+            <li>{{ weakness.element|capfirst }} (Stars: {{ weakness.stars }})</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

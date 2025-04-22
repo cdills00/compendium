@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-6 py-10">
+  <h1 class="text-4xl font-bold mb-10 text-center">🛡️ Monster Hunter Armor Compendium</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for piece in armor %}
+    <div class="card bg-base-100 shadow-xl border border-base-300 hover:shadow-2xl transition-shadow duration-200">
+      <div class="card-body space-y-2">
+        <!-- Header with icon -->
+        <div class="flex items-center justify-between">
+          <h2 class="card-title text-lg font-semibold">{{ piece.name }}</h2>
+          {% if piece.assets and piece.assets.icon %}
+          <img src="{{ piece.assets.icon }}" alt="{{ piece.name }} icon" class="w-10 h-10" />
+          {% endif %}
+        </div>
+
+        <!-- Type / Rarity -->
+        <p><span class="font-semibold">Type:</span> {{ piece.type|capfirst }}</p>
+        <p><span class="font-semibold">Rarity:</span>
+          <span class="badge badge-neutral">{{ piece.rarity }}</span>
+        </p>
+
+        <!-- Defense -->
+        <p><span class="font-semibold">Defense:</span> Base {{ piece.defense.base }}, Max {{ piece.defense.max }}</p>
+
+        <!-- Resistances -->
+        {% if piece.resistances %}
+        <div class="pt-2">
+          <p class="font-semibold mb-1">Resistances:</p>
+          <ul class="text-sm pl-4 list-disc space-y-1">
+            <li>🔥 Fire: {{ piece.resistances.fire }}</li>
+            <li>💧 Water: {{ piece.resistances.water }}</li>
+            <li>❄️ Ice: {{ piece.resistances.ice }}</li>
+            <li>⚡ Thunder: {{ piece.resistances.thunder }}</li>
+            <li>🐉 Dragon: {{ piece.resistances.dragon }}</li>
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

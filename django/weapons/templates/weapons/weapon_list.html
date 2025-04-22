@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-6">
+  <h1 class="text-4xl font-bold mb-6 text-center">🗡️ Monster Hunter Weapons Compendium</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {% for weapon in weapons %}
+    <div class="card bg-base-100 shadow-lg border border-base-300">
+      <div class="card-body">
+        <h2 class="card-title text-xl">
+          {{ weapon.name }}
+        </h2>
+        <p><span class="font-semibold">Type:</span> {{ weapon.type|capfirst }}</p>
+        <p><span class="font-semibold">Attack:</span> {{ weapon.attack.display }}</p>
+        <p><span class="font-semibold">Rarity:</span> 
+          <span class="badge badge-outline">{{ weapon.rarity }}</span>
+        </p>
+
+        {% if weapon.elements and weapon.elements.0.type %}
+          <p>
+            <span class="font-semibold">Element:</span> {{ weapon.elements.0.type }}
+            {% if weapon.elements.0.damage %} — {{ weapon.elements.0.damage }} dmg{% endif %}
+          </p>
+        {% endif %}
+
+        {% if weapon.assets and weapon.assets.icon %}
+        <figure class="mt-3">
+          <img src="{{ weapon.assets.icon }}" alt="{{ weapon.name }}" class="w-16 h-16" />
+        </figure>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
