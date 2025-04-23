@@ -1,6 +1,63 @@
 <html lang="en" data-theme="dark">
 
 {% load static %}
+
+<nav>
+    {% if not user.is_authenticated %}
+      <form method="get" action="{% url 'signup' %}" style="display:inline;">
+        <button
+          type="submit"
+          style="
+            padding: 0.5em 1em;
+            background: brown;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          Sign Up
+        </button>
+      </form>
+  
+      <form method="get" action="{% url 'login' %}" style="display:inline; margin-left: 0.5em;">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button
+          type="submit"
+          style="
+            padding: 0.5em 1em;
+            background: brown;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          Login
+        </button>
+      </form>
+    {% else %}
+      <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button
+          type="submit"
+          style="
+            padding: 0.5em 1em;
+            background: brown;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          Logout
+        </button>
+      </form>
+    {% endif %}
+  </nav>
+
+
+
 <head>
     <title>{% block title %}The Compendium{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/output.css' %}">

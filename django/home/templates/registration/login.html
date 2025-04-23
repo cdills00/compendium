@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Log in</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}            {# renders username/password fields #}
+    <button type="submit">Log in</button>
+  </form>
+  {% if form.errors %}
+    <p style="color:red;">Invalid credentials, please try again.</p>
+  {% endif %}
+{% endblock %}
