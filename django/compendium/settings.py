@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# At top of file, added for OAUTH!!!!!!!!
+SITE_ID = 1
 
 # Application definition
 
@@ -41,6 +43,11 @@ INSTALLED_APPS = [
     'weapons',
     'armor',
     'monsters',
+    'django.contrib.sites',            # all below!!!!  required byOAUTH  allauth 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',    # ← add this line
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -132,3 +140,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # added for login bofum
 LOGIN_REDIRECT_URL  = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# added for OAUTH
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',           # default
+    'allauth.account.auth_backends.AuthenticationBackend', # adds allauth
+]

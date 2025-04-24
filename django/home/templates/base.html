@@ -1,10 +1,12 @@
 <html lang="en" data-theme="dark">
-
+{% load socialaccount %}
 {% load static %}
 
+
+<!---login and logout-->
 <nav>
     {% if not user.is_authenticated %}
-      <form method="get" action="{% url 'signup' %}" style="display:inline;">
+      <form method="get" action="{% url 'account_signup' %}" style="display:inline;">
         <button
           type="submit"
           style="
@@ -20,7 +22,7 @@
         </button>
       </form>
   
-      <form method="get" action="{% url 'login' %}" style="display:inline; margin-left: 0.5em;">
+      <form method="get" action="{% url 'account_login' %}" style="display:inline; margin-left: 0.5em;">
         <input type="hidden" name="next" value="{{ request.path }}">
         <button
           type="submit"
@@ -37,7 +39,7 @@
         </button>
       </form>
     {% else %}
-      <form method="post" action="{% url 'logout' %}" style="display:inline;">
+      <form method="post" action="{% url 'account_logout' %}" style="display:inline;">
         {% csrf_token %}
         <button
           type="submit"
@@ -56,6 +58,33 @@
     {% endif %}
   </nav>
 
+
+
+<!----google login-->
+<nav style="display: flex; justify-content: space-between; align-items: center;">
+  <!-- Left-side content (e.g. site title or other links) -->
+  <div>
+    <a href="/">Home</a>
+    <!-- … other links … -->
+  </div>
+
+  <!-- Right-side: Google login button -->
+  <form method="get"
+        action="{% provider_login_url 'google' %}"
+        style="margin: 0;">
+    <button type="submit"
+            style="
+              padding: 0.5em 1em;
+              background: brown;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            ">
+      Login with Google
+    </button>
+  </form>
+</nav>
 
 
 <head>
