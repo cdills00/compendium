@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% load monster_extra %}
+
 {% block content %}
 
 <div class="max-w-7xl mx-auto px-6 py-10">
@@ -26,6 +29,18 @@
           </ul>
         </div>
         {% endif %}
+        {% if monster.notes %}
+          <div class="mt-4 bg-base-200 p-3 rounded-lg">
+            <p class="font-semibold">Notes:</p>
+            <div class="prose prose-h1:text-4xl prose-h1:font-bold max-w-none">
+              {{ monster.notes|convert_markdown|safe }}
+            </div>
+          </div>
+        {% endif %}
+
+        <a href="{% url 'edit_monster_notes' monster.id %}" class="btn btn-sm btn-outline mt-2">
+          ✏️ Edit Notes
+        </a>
       </div>
     </div>
     {% endfor %}

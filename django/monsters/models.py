@@ -6,6 +6,7 @@ class Monster(models.Model):
     species = models.CharField(max_length=50, blank=True)
     elements = models.JSONField(blank=True, null=True)      # List of strings
     weaknesses = models.JSONField(blank=True, null=True)    # List of dicts
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
