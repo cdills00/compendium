@@ -12,6 +12,7 @@ class Armor(models.Model):
     armor_set = models.JSONField(blank=True, null=True)     # id, name, rank, pieces
     assets = models.JSONField(blank=True, null=True)        # icon, imageMale, imageFemale
     crafting = models.JSONField(blank=True, null=True)      # materials list
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name

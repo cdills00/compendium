@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+{% load armor_extra %}
 {% block content %}
 
 <div class="max-w-7xl mx-auto px-6 py-10">
@@ -38,6 +40,23 @@
           </ul>
         </div>
         {% endif %}
+
+        <!-- Notes Section -->
+        {% if piece.notes %}
+        <div class="pt-4">
+          <p class="font-semibold">📝 Notes:</p>
+          <div class="bg-base-200 p-3 rounded text-sm whitespace-pre-wrap">
+            {{ piece.notes|convert_markdown|safe }}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Edit Notes Button -->
+        <div class="pt-4">
+          <a href="{% url 'edit_armor_notes' armor_id=piece.id %}" class="btn btn-sm btn-outline">
+            ✏️ Edit Notes
+          </a>
+        </div>
       </div>
     </div>
     {% endfor %}

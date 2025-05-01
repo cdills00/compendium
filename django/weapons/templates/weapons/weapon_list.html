@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load weapons_extra %}
 {% block content %}
 <div class="p-6">
   <h1 class="text-4xl font-bold mb-6 text-center">🗡️ Monster Hunter Weapons Compendium</h1>
@@ -29,6 +29,24 @@
           <img src="{{ weapon.assets.icon }}" alt="{{ weapon.name }}" class="w-16 h-16" />
         </figure>
         {% endif %}
+
+        <!-- Notes Section -->
+        {% if weapon.notes %}
+        <div class="pt-4">
+          <p class="font-semibold">📝 Notes:</p>
+          <div class="bg-base-200 p-3 rounded text-sm whitespace-pre-wrap">
+            {{ weapon.notes|convert_markdown|safe }}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Edit Notes Button -->
+        <div class="pt-4">
+          <a href="{% url 'edit_weapons_notes' weapon_id=weapon.id %}" class="btn btn-sm btn-outline">
+            ✏️ Edit Notes
+          </a>
+        </div>
+
       </div>
     </div>
     {% endfor %}

@@ -7,6 +7,7 @@ class Weapon(models.Model):
     attack = models.JSONField(blank=True, null=True)      # Stores attack details like 'display'
     elements = models.JSONField(blank=True, null=True)    # List of elements with 'type' and 'damage'
     assets = models.JSONField(blank=True, null=True)      # Stores asset information like 'icon'
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
